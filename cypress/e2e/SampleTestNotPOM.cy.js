@@ -5,6 +5,7 @@ describe('Job Applicaton Form', () => {
   beforeEach(() => {
 
     cy.visit('job-application-form/')
+    cy.wait(300)
   })
 
   it('All fields can be filled', () => {
@@ -25,18 +26,15 @@ describe('Job Applicaton Form', () => {
   it('All mandatory fields are highlighted', () => {
 
     User
-      .findsTextField('First Name').typesText('{Enter}')
-      .findsTextField('Email').typesText('{Enter}')
       .findsButton('Next').clicks()
       .findsTextField('Email').expectsWarningMessage('This field is required')
       .findsQuestion('How familiar are you with WordPress?').expectsWarningMessage('This field is required')
       .findsQuestion('Have you ever developed a WordPress theme before?').expectsWarningMessage('This field is required')
       .findsQuestion('Have you previously worked as a support engineer?').expectsWarningMessage('This field is required')
-      .findsTextField('Email').typesText('testEmail@test.test{Enter}')
+      .findsTextField('Email').typesText('testEmail@test.test')
       .findsQuestion('How familiar are you with WordPress?').selectsAnswer('Eat, Sleep, WordPress, Repeat')
       .findsQuestion('Have you ever developed a WordPress theme before?').selectsAnswer('Yes')
       .findsQuestion('Have you previously worked as a support engineer?').selectsAnswer('No')
-      .findsTextField('First Name').typesText('{Enter}')
       .findsTextField('Email').expectsNoWarningMessage()
       .findsQuestion('How familiar are you with WordPress?').expectsNoWarningMessage()
       .findsQuestion('Have you ever developed a WordPress theme before?').expectsNoWarningMessage()
@@ -49,6 +47,7 @@ describe('Contact Form', () => {
   beforeEach(() => {
 
     cy.visit('contact-form-demo/')
+    cy.wait(300)
   })
 
   it('All fields can be filled', () => {
@@ -62,15 +61,13 @@ describe('Contact Form', () => {
   })
 
   it('All mandatory fields are highlighted', () => {
-
     User
-      .findsTextField('First Name').typesText('{Enter}')
       .findsButton('Submit Form').clicks()
       .findsTextField('Email').expectsWarningMessage('This field is required')
       .findsTextBox('Your Message').expectsWarningMessage('This field is required')
       .findsTextField('Email').typesText('testEmail@test.test')
       .findsTextBox('Your Message').typesText('testMessage')
-      .findsTextField('First Name').typesText('{Enter}')
+      .findsTextField('First Name').clicks()
       .findsTextField('Email').expectsNoWarningMessage()
       .findsTextBox('Your Message').expectsNoWarningMessage()
   })

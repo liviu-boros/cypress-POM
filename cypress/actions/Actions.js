@@ -3,15 +3,15 @@ class UserActions {
   // Anchors
   //
   findsTextField(label) {
-    this.locator = cy.contains(label).parent().siblings().find('input')
+    this.locator = cy.contains(label).parent().next().find('input')
     return this
   }
   findsTextBox(label) {
-    this.locator = cy.contains(label).parent().siblings().find('textarea')
+    this.locator = cy.contains(label).parent().next().find('textarea')
     return this
   }
   findsDropdownField(label) {
-    this.locator = cy.contains(label).parent().siblings().find('select')
+    this.locator = cy.contains(label).parent().next().find('select')
     return this
   }
   findsQuestion(label) {
@@ -19,7 +19,7 @@ class UserActions {
     return this
   }
   findsButton(label) {
-    this.locator = cy.contains('button', `${label}`)
+    this.locator = cy.contains('button', label)
     return this
   }
 
@@ -30,7 +30,7 @@ class UserActions {
     return this
   }
   clicks() {
-    this.locator.click()
+    this.locator.should('be.visible').click()
     return this
   }
   selectsOption(option) {
@@ -38,7 +38,7 @@ class UserActions {
     return this
   }
   selectsAnswer(option) {
-    this.locator.contains(option).find('input[type="checkbox"]').click({ force: true })
+    this.locator.contains(option).find('input[type="checkbox"]').click()
     return this
   }
   expectsWarningMessage(warningText) {
